@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power point</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <a href="/" class="crumb">Layouts</a><span class="crumb">›</span>
+  <a id="back" class="crumb">layout</a><span class="crumb">›</span>
+  <h1 id="title">…</h1>
+  <span id="desc" class="muted"></span>
+</header>
+<main>
+  <div class="point-grid">
+    <div>
+      <section class="card">
+        <div class="muted">Latest</div>
+        <div class="big" id="latest">—</div>
+        <div id="latest2" class="muted"></div>
+      </section>
+      <section class="card">
+        <h2>Add a reading</h2>
+        <form id="add">
+          <div class="form-row"><label>Power</label>
+            <input type="number" name="value" step="any" min="0" inputmode="decimal" required autofocus>
+            <select name="unit" id="unit"></select></div>
+          <div class="form-row"><label>Meter</label>
+            <input class="grow" name="meter" id="meter" placeholder="e.g. Thorlabs S120C"></div>
+          <div class="form-row"><label>Notes</label>
+            <input class="grow" name="notes" placeholder="e.g. after cleaning PBS"></div>
+          <div class="form-row"><label></label><button class="primary" type="submit">Add reading</button>
+            <span class="muted" style="font-size:13px">time is set automatically</span></div>
+          <div class="msg" id="addmsg"></div>
+        </form>
+      </section>
+      <section class="card">
+        <h2>Add a beam picture</h2>
+        <form id="pic">
+          <div class="form-row"><input class="grow" name="notes" placeholder="Notes, e.g. CCD 30 cm after PBS"></div>
+          <div class="form-row">
+            <label class="btn" style="min-width:0;color:inherit">Choose file…
+              <input type="file" name="file" accept="image/*" hidden></label>
+            <label class="btn" style="min-width:0;color:inherit">Take photo
+              <input type="file" name="photo" accept="image/*" capture="environment" hidden></label>
+          </div>
+          <div class="msg" id="picmsg"></div>
+        </form>
+      </section>
+    </div>
+    <div>
+      <section class="card">
+        <h2>Power over time</h2>
+        <svg id="plot" viewBox="0 0 700 220" style="width:100%;height:auto"></svg>
+      </section>
+      <section class="card">
+        <h2>Readings</h2>
+        <div style="overflow:auto"><table class="log" id="hist"></table></div>
+      </section>
+      <section class="card">
+        <h2>Beam pictures</h2>
+        <div class="pics" id="pics"></div>
+      </section>
+    </div>
+  </div>
+</main>
+<script>
+const parts = location.pathname.split("/");
+const fi = parts[2], name = parts[3], pid = decodeURIComponent(parts[5]);
+const base = `/api/layout/${fi}/${name}/point/${encodeURIComponent(pid)}`;
+document.getElementById("back").href = `/layout/${fi}/${name}`;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const fmt = mw => mw >= 1000 ? (mw / 1000).toPrecision(3) + " W" : mw >= 1 ? (+mw.toPrecision(3)) + " mW"
+  : mw >= 1e-3 ? (+(mw * 1e3).toPrecision(3)) + " µW" : (+(mw * 1e6).toPrecision(3)) + " nW";
+try { document.getElementById("meter").value = localStorage.getItem("meter") || ""; } catch (e) {}
+
+function plot(hist) {
+  const svg = document.getElementById("plot");
+  const W = 700, H = 220, l = 70, r = 12, t = 10, b = 28;
+  if (!hist.length) { svg.innerHTML = `<text x="${W / 2}" y="${H / 2}" text-anchor="middle" fill="#888">No readings yet</text>`; return; }
+  const ts = hist.map(h => new Date(h.iso).getTime()), ys = hist.map(h => h.power_mw);
+  let t0 = Math.min(...ts), t1 = Math.max(...ts); if (t1 === t0) { t0 -= 3600e3; t1 += 3600e3; }
+  let y0 = Math.min(...ys), y1 = Math.max(...ys); const pad = (y1 - y0) * 0.15 || Math.abs(y1) * 0.1 || 1;
+  y0 -= pad; y1 += pad;
+  const X = v => l + (v - t0) / (t1 - t0) * (W - l - r), Y = v => H - b - (v - y0) / (y1 - y0) * (H - t - b);
+  let s = `<rect x="${l}" y="${t}" width="${W - l - r}" height="${H - t - b}" fill="#fff" stroke="#bbb"/>`;
+  for (const f of [0, 0.5, 1]) {
+    const v = y0 + f * (y1 - y0);
+    s += `<text x="${l - 6}" y="${Y(v) + 4}" text-anchor="end" font-size="11" fill="#555">${fmt(v)}</text>`;
+  }
+  const d = t => new Date(t).toLocaleString([], {dateStyle: "short", timeStyle: "short"});
+  s += `<text x="${l}" y="${H - 8}" font-size="11" fill="#555">${d(t0)}</text>
+        <text x="${W - r}" y="${H - 8}" text-anchor="end" font-size="11" fill="#555">${d(t1)}</text>`;
+  s += `<polyline fill="none" stroke="#7f3fbf" stroke-width="1.8" points="${ts.map((v, i) => X(v) + "," + Y(ys[i])).join(" ")}"/>`;
+  s += ts.map((v, i) => `<circle cx="${X(v)}" cy="${Y(ys[i])}" r="3.2" fill="#7f3fbf"><title>${esc(hist[i].when)}  ${esc(hist[i].power)}</title></circle>`).join("");
+  svg.innerHTML = s;
+}
+
+async function load() {
+  const p = await (await fetch(base)).json();
+  document.title = `${p.label} — ${p.layout_title}`;
+  document.getElementById("title").textContent = p.label + (p.name ? " · " + p.name : "");
+  document.getElementById("desc").textContent = p.desc;
+  document.getElementById("back").textContent = p.layout_title;
+  const unit = document.getElementById("unit");
+  if (!unit.options.length) unit.innerHTML = p.units.map(u => `<option>${esc(u)}</option>`).join("");
+  document.getElementById("latest").textContent = p.power || "—";
+  let l2 = p.when ? p.when : "no reading yet";
+  if (p.change_pct != null) l2 += ` · <span class="${Math.abs(p.change_pct) >= 10 ? (p.change_pct < 0 ? "down" : "up") : ""}">${p.change_pct > 0 ? "+" : ""}${p.change_pct.toFixed(0)} % vs previous</span>`;
+  if (p.coupled_pct != null) l2 += ` · ${p.coupled_pct} % coupled`;
+  document.getElementById("latest2").innerHTML = l2;
+  const rows = [...p.history].reverse().map(h => `<tr><td>${esc(h.when)}</td><td class="num">${esc(h.power)}</td>
+    <td>${esc(h.meter)}</td><td>${esc(h.notes)}</td></tr>`);
+  document.getElementById("hist").innerHTML = `<tr><th>Measured</th><th class="num">Power</th><th>Meter</th><th>Notes</th></tr>`
+    + (rows.join("") || `<tr><td colspan="4" class="muted">No readings yet</td></tr>`);
+  plot(p.history);
+  document.getElementById("pics").innerHTML = p.pictures.map(x => `<figure><a href="${base}/picture/${x.id}" target="_blank">
+      <img src="${base}/picture/${x.id}" alt="${esc(x.filename)}" loading="lazy"></a>
+      <figcaption>${esc(x.when)}${x.notes ? "<br>" + esc(x.notes) : ""}</figcaption></figure>`).join("")
+    || `<span class="muted">No pictures yet</span>`;
+}
+
+document.getElementById("add").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = e.target, msg = document.getElementById("addmsg");
+  msg.textContent = "Saving…"; msg.className = "msg muted";
+  try { localStorage.setItem("meter", f.meter.value); } catch (err) {}
+  const r = await fetch(base + "/reading", {method: "POST", body: new FormData(f)});
+  if (r.ok) {
+    msg.textContent = `Logged ${f.value.value} ${f.unit.value}.`; msg.className = "msg up";
+    f.value.value = ""; f.notes.value = ""; await load(); f.value.focus();
+  } else { msg.textContent = (await r.json()).detail || "Could not save"; msg.className = "msg down"; }
+});
+async function upload(input) {
+  if (!input.files.length) return;
+  const f = document.getElementById("pic"), msg = document.getElementById("picmsg");
+  const fd = new FormData();
+  fd.append("file", input.files[0]);
+  fd.append("notes", f.notes.value);
+  msg.textContent = "Uploading…"; msg.className = "msg muted";
+  const r = await fetch(base + "/picture", {method: "POST", body: fd});
+  if (r.ok) { msg.textContent = "Picture added."; msg.className = "msg up"; f.notes.value = ""; await load(); }
+  else { msg.textContent = (await r.json()).detail || "Could not upload"; msg.className = "msg down"; }
+  input.value = "";
+}
+document.querySelector("#pic input[name=file]").addEventListener("change", e => upload(e.target));
+document.querySelector("#pic input[name=photo]").addEventListener("change", e => upload(e.target));
+load();
+setInterval(() => { if (document.visibilityState === "visible" && !document.activeElement.matches("input")) load(); }, 10000);
+</script>
+</body>
+</html>

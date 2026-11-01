@@ -1,0 +1,185 @@
+{
+  "format": "optolayout",
+  "version": 1,
+  "table": {
+    "name": "Schematic demo, 24 x 18 in",
+    "width": 609.6,
+    "height": 457.2,
+    "hole_pitch": 25.4,
+    "hole_offset": 12.7,
+    "cutouts": [],
+    "center_holes": false,
+    "style": "grid",
+    "hole_diameter": 6.6,
+    "edge_margin": 0.0,
+    "grid_holes": true
+  },
+  "components": [],
+  "beams": [],
+  "measurement_points": [],
+  "schematic": {
+    "elements": [
+      {
+        "id": "las",
+        "kind": "laser",
+        "x": 0,
+        "y": 0,
+        "angle": 0.0,
+        "label": "LAS1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "hwp",
+        "kind": "hwp",
+        "x": 70,
+        "y": 0,
+        "angle": 0.0,
+        "label": "HWP1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "pbs",
+        "kind": "pbs",
+        "x": 130,
+        "y": 0,
+        "angle": 0.0,
+        "label": "PBS1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "aom",
+        "kind": "aom",
+        "x": 210,
+        "y": 0,
+        "angle": 0.0,
+        "label": "AOM1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "l1",
+        "kind": "lens",
+        "x": 280,
+        "y": 0,
+        "angle": 0.0,
+        "label": "L1",
+        "notes": "",
+        "part": "",
+        "part_number": "LA1509-A",
+        "auto_angle": true
+      },
+      {
+        "id": "m1",
+        "kind": "mirror",
+        "x": 340,
+        "y": 0,
+        "angle": 0.0,
+        "label": "M1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "fc",
+        "kind": "fiber",
+        "x": 340,
+        "y": -90,
+        "angle": 0.0,
+        "label": "FC1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "bd",
+        "kind": "dump",
+        "x": 130,
+        "y": 80,
+        "angle": 0.0,
+        "label": "BD1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      }
+    ],
+    "links": [
+      {
+        "id": "k_las_hwp",
+        "source": "las",
+        "target": "hwp",
+        "color": "#b77fd0",
+        "wavelength_nm": 399.0,
+        "label": ""
+      },
+      {
+        "id": "k_hwp_pbs",
+        "source": "hwp",
+        "target": "pbs",
+        "color": "#b77fd0",
+        "wavelength_nm": 399.0,
+        "label": ""
+      },
+      {
+        "id": "k_pbs_aom",
+        "source": "pbs",
+        "target": "aom",
+        "color": "#b77fd0",
+        "wavelength_nm": 399.0,
+        "label": ""
+      },
+      {
+        "id": "k_aom_l1",
+        "source": "aom",
+        "target": "l1",
+        "color": "#b77fd0",
+        "wavelength_nm": 399.0,
+        "label": ""
+      },
+      {
+        "id": "k_l1_m1",
+        "source": "l1",
+        "target": "m1",
+        "color": "#b77fd0",
+        "wavelength_nm": 399.0,
+        "label": ""
+      },
+      {
+        "id": "k_m1_fc",
+        "source": "m1",
+        "target": "fc",
+        "color": "#b77fd0",
+        "wavelength_nm": 399.0,
+        "label": ""
+      },
+      {
+        "id": "k_pbs_bd",
+        "source": "pbs",
+        "target": "bd",
+        "color": "#b77fd0",
+        "wavelength_nm": 399.0,
+        "label": ""
+      }
+    ]
+  },
+  "lab_sheet": {
+    "points": [],
+    "names": {},
+    "include_log": true,
+    "history": 1,
+    "include_picture": true
+  }
+}

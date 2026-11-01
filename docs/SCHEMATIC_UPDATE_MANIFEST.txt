@@ -1,0 +1,7 @@
+Files this update replaces, with the SHA-256 of the version it was built on.
+If your copy has a different hash, it was changed locally: compare before overwriting.
+d25edbeb674dec707cc8808114baf13e9073c3a6353b080c286b23cb2a26f6b8  optolayout/model.py
+051c471e636eb4c95f4c036bc29d9e663ad260abd87bc97f1b2a859e3a49fbdd  optolayout/scene.py
+15b31a5ee5d71dbed167678e1684fe7ba7736d937690b4536d6ebd10ab8ac02a  optolayout/app.py
+
+New files: optolayout/schematic.py, examples/make_demo_schematic.py, examples/demo_schematic.json, tests/test_schematic.py, docs/SCHEMATIC.md

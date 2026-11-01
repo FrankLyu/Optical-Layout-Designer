@@ -1,0 +1,43 @@
+# Files that stay on this PC and never go to GitHub. Nothing here is deleted.
+
+# ---- CAD: vendors' and the lab's full models ----
+*.step
+*.stp
+*.sldprt
+*.sldasm
+*.slddrw
+*.ply
+~$*
+component_library/step/
+component_library/preview.png
+# the light meshes the 3D view reads do go up
+!component_library/mesh/**/*.ply
+# these two folders go up with their STL files only
+component_library/Olego_step/*
+!component_library/Olego_step/*.stl
+!component_library/Olego_step/*.STL
+component_library/lightflow small mount - new/*
+!component_library/lightflow small mount - new/*.stl
+!component_library/lightflow small mount - new/*.STL
+examples/render/
+
+# ---- Settings with the lab password (web/config.example.json is the template) ----
+web/config.json
+
+# ---- The lab's real power logs (readings and beam pictures) ----
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+!examples/demo_399nm.logbook.sqlite
+
+# ---- Screenshots of lab boards, backups ----
+_backups/
+docs/screenshots/
+
+# ---- Python and tools ----
+__pycache__/
+*.pyc
+.claude/
+.venv/
+venv/

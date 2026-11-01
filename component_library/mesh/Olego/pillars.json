@@ -1,0 +1,97 @@
+{
+  "Olego_CP33": {
+    "height": 31.5,
+    "seat": 30.5,
+    "flange": 31.5,
+    "steps": [
+      30.5,
+      31.5
+    ]
+  },
+  "Olego_LMR1": {
+    "height": 29.9,
+    "seat": 27.9,
+    "flange": 31.0,
+    "steps": [
+      27.9
+    ]
+  },
+  "Olego_M05": {
+    "height": 39.6,
+    "seat": 38.1,
+    "flange": 31.5,
+    "steps": [
+      29.1,
+      37.7,
+      38.1,
+      39.6
+    ]
+  },
+  "Olego_M05_0deg": {
+    "height": 39.6,
+    "seat": 38.1,
+    "flange": 31.5,
+    "steps": [
+      28.1,
+      37.7,
+      38.1,
+      39.6
+    ]
+  },
+  "Olego_MDI_HS": {
+    "height": 25.32,
+    "seat": 24.3,
+    "flange": 31.5,
+    "steps": [
+      24.3,
+      25.3
+    ]
+  },
+  "Olego_PBS_0.5in": {
+    "height": 45.47,
+    "seat": 44.5,
+    "flange": 18.8,
+    "steps": [
+      35.6,
+      44.5,
+      45.5
+    ]
+  },
+  "Olego_polaris_0.5inch_mirror": {
+    "height": 39.37,
+    "seat": 38.1,
+    "flange": 31.5,
+    "steps": [
+      29.2,
+      34.4,
+      37.7,
+      38.1,
+      39.4
+    ]
+  },
+  "Olego_RSP05": {
+    "height": 37.85,
+    "seat": 36.8,
+    "flange": 18.8,
+    "steps": [
+      36.8
+    ]
+  },
+  "Olego_SR475": {
+    "height": 44.0,
+    "seat": 44.0,
+    "flange": 31.4,
+    "steps": [
+      44.0
+    ]
+  },
+  "PD36A2_mount": {
+    "height": 30.8,
+    "seat": 25.8,
+    "flange": 31.5,
+    "steps": [
+      25.8,
+      30.8
+    ]
+  }
+}

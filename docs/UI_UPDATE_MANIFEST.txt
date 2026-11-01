@@ -1,0 +1,15 @@
+Files this update replaces, with the SHA-256 of the version it was built on.
+If your copy has a different hash it was changed locally: back it up and compare before overwriting.
+e1483193e7ea76227bffc3f637901ecc459829df577dc754cca6d43063ed8851  optolayout/model.py
+d49b8b5046fc0b0aee3f36154fa67c6d76424e23a34c0031f1067ab9e9efd16c  optolayout/scene.py
+cbe2493376c649a6e39aaa44512170f67450d124ac387a981b19802e5a016956  optolayout/app.py
+40fc8dfc0abb05d4b0b43f3a64d1a70f11858cee0317ea56cc593aa505619f44  optolayout/schematic.py
+c047d8e10e56be0048af2930a68423a97a403d8a6c85422e403121300dcd3c3b  README.md
+f301b0bae1e3e3aa33790481346a1de9bae7675dc25d9c44950a6aac676e3ec5  tests/test_interaction.py
+5fe7c7c5c09520be1da8cf9c72a91b3a77df053817ea42c5bbe9ba0714567262  tests/test_schematic.py
+51944a1e82e842978f19d7495f912e50c7f323da5ea847f9cb5a2857a67389da  examples/make_demo_schematic.py
+6c55a48e541553819488d221645605a271afd1a941e2296009719cbc06f7b77b  examples/demo_schematic.json
+c68342da307692c3b3701c8a7f0ec97f8b583d72bedd5952db532a007e038aeb  docs/SCHEMATIC.md
+
+New files: optolayout/orient.py, docs/UI_NOTES.md, docs/screenshots/ui_*.png
+Not included on purpose: optolayout/measure_ui.py (keep your local copy; app.py calls MeasurementDialog(logbook, point, desc, wavelength, parent)).

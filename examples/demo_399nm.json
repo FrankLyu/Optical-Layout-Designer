@@ -1,0 +1,455 @@
+{
+  "format": "optolayout",
+  "version": 1,
+  "table": {
+    "name": "36\" x 24\" breadboard",
+    "width": 914.4,
+    "height": 609.6,
+    "hole_pitch": 25.4,
+    "hole_offset": 12.7
+  },
+  "components": [
+    {
+      "id": "laser",
+      "type": "laser",
+      "x": 190.49999999999997,
+      "y": 88.89999999999999,
+      "angle": 0.0,
+      "label": "399 nm, -260 MHz",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "m1",
+      "type": "mirror_rd_1in",
+      "x": 266.7,
+      "y": 88.89999999999999,
+      "angle": 225.0,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "m2",
+      "type": "mirror_rd_1in",
+      "x": 266.7,
+      "y": 241.29999999999998,
+      "angle": 45.0,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "hwp1",
+      "type": "hwp",
+      "x": 361.95,
+      "y": 241.29999999999998,
+      "angle": 0.0,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "pbs1",
+      "type": "pbs_mounted",
+      "x": 393.7,
+      "y": 241.29999999999998,
+      "angle": 0.0,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "hwp0",
+      "type": "hwp",
+      "x": 425.45,
+      "y": 241.29999999999998,
+      "angle": 180,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "m3",
+      "type": "mirror_rd_half_in",
+      "x": 393.7,
+      "y": 165.09999999999997,
+      "angle": 315.0,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "m4",
+      "type": "mirror_rd_half_in",
+      "x": 444.49999999999994,
+      "y": 165.09999999999997,
+      "angle": 135.0,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "fib_3d",
+      "type": "fiber",
+      "x": 444.49999999999994,
+      "y": 88.89999999999999,
+      "angle": 270,
+      "label": "3D MOT, -40 MHz",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "aom1",
+      "type": "aom",
+      "x": 393.7,
+      "y": 342.9,
+      "angle": 90,
+      "label": "+80 MHz",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "l1",
+      "type": "lens_1in",
+      "x": 393.7,
+      "y": 419.09999999999997,
+      "angle": 90,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "qwp1",
+      "type": "qwp",
+      "x": 393.7,
+      "y": 469.9,
+      "angle": 90,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "retro1",
+      "type": "mirror_rd_1in",
+      "x": 393.7,
+      "y": 546.1,
+      "angle": 90,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "pbs2",
+      "type": "pbs",
+      "x": 546.1,
+      "y": 241.29999999999998,
+      "angle": 0.0,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "hwp2",
+      "type": "hwp_half",
+      "x": 546.1,
+      "y": 165.09999999999997,
+      "angle": 90,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "fib_2d",
+      "type": "fiber",
+      "x": 546.1,
+      "y": 88.89999999999999,
+      "angle": 270,
+      "label": "2D MOT, -40 MHz",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "m5",
+      "type": "mirror_1in",
+      "x": 698.5,
+      "y": 241.29999999999998,
+      "angle": 225.0,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "aom2",
+      "type": "aom",
+      "x": 698.5,
+      "y": 342.9,
+      "angle": 90,
+      "label": "+20 MHz",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "ir1",
+      "type": "iris",
+      "x": 698.5,
+      "y": 406.4,
+      "angle": 90,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "l2",
+      "type": "lens_half_in",
+      "x": 698.5,
+      "y": 457.2,
+      "angle": 90,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "fib_probe",
+      "type": "fiber",
+      "x": 698.5,
+      "y": 520.7,
+      "angle": 90,
+      "label": "Probe, 0 MHz",
+      "part_number": "",
+      "notes": ""
+    },
+    {
+      "id": "dump1",
+      "type": "dump",
+      "x": 774.7,
+      "y": 342.9,
+      "angle": 0.0,
+      "label": "",
+      "part_number": "",
+      "notes": ""
+    }
+  ],
+  "beams": [
+    {
+      "id": "b_laser_m1",
+      "source": "laser",
+      "target": "m1",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_m1_m2",
+      "source": "m1",
+      "target": "m2",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_m2_hwp1",
+      "source": "m2",
+      "target": "hwp1",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_hwp1_pbs1",
+      "source": "hwp1",
+      "target": "pbs1",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_pbs1_hwp0",
+      "source": "pbs1",
+      "target": "hwp0",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_hwp0_pbs2",
+      "source": "hwp0",
+      "target": "pbs2",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_pbs2_m5",
+      "source": "pbs2",
+      "target": "m5",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_m5_aom2",
+      "source": "m5",
+      "target": "aom2",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_aom2_ir1",
+      "source": "aom2",
+      "target": "ir1",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_ir1_l2",
+      "source": "ir1",
+      "target": "l2",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_l2_fib_probe",
+      "source": "l2",
+      "target": "fib_probe",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_pbs1_m3",
+      "source": "pbs1",
+      "target": "m3",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_m3_m4",
+      "source": "m3",
+      "target": "m4",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_m4_fib_3d",
+      "source": "m4",
+      "target": "fib_3d",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_pbs1_aom1",
+      "source": "pbs1",
+      "target": "aom1",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_aom1_l1",
+      "source": "aom1",
+      "target": "l1",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_l1_qwp1",
+      "source": "l1",
+      "target": "qwp1",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_qwp1_retro1",
+      "source": "qwp1",
+      "target": "retro1",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_pbs2_hwp2",
+      "source": "pbs2",
+      "target": "hwp2",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_hwp2_fib_2d",
+      "source": "hwp2",
+      "target": "fib_2d",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_aom2_dump1",
+      "source": "aom2",
+      "target": "dump1",
+      "color": "#dcc3e8",
+      "wavelength_nm": 399.0,
+      "label": "0th order"
+    }
+  ],
+  "measurement_points": [
+    {
+      "id": "mp_laser",
+      "label": "P1",
+      "beam_id": "b_m2_hwp1",
+      "t": 0.5,
+      "archived": false,
+      "x": 0.0,
+      "y": 0.0,
+      "notes": ""
+    },
+    {
+      "id": "mp_3d",
+      "label": "P2",
+      "beam_id": "b_m4_fib_3d",
+      "t": 0.5,
+      "archived": false,
+      "x": 0.0,
+      "y": 0.0,
+      "notes": ""
+    },
+    {
+      "id": "mp_dp",
+      "label": "P3",
+      "beam_id": "b_aom1_l1",
+      "t": 0.5,
+      "archived": false,
+      "x": 0.0,
+      "y": 0.0,
+      "notes": ""
+    },
+    {
+      "id": "mp_2d",
+      "label": "P4",
+      "beam_id": "b_hwp2_fib_2d",
+      "t": 0.5,
+      "archived": false,
+      "x": 0.0,
+      "y": 0.0,
+      "notes": ""
+    },
+    {
+      "id": "mp_probe",
+      "label": "P5",
+      "beam_id": "b_l2_fib_probe",
+      "t": 0.5,
+      "archived": false,
+      "x": 0.0,
+      "y": 0.0,
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# web viewer and power logger (on top of the desktop app's requirements.txt)
+fastapi>=0.110
+uvicorn>=0.29
+python-multipart>=0.0.9
+# for the tests only
+httpx>=0.27

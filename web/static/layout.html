@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Layout</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <a href="/" class="crumb">Layouts</a><span class="crumb">›</span>
+  <h1 id="title">…</h1>
+  <span id="file" class="muted"></span>
+  <span class="spacer"></span>
+  <div class="tabs">
+    <a id="sheetlink" class="btn">Lab sheet</a>
+  </div>
+</header>
+<main style="max-width:none">
+  <div class="layout-wrap">
+    <div class="viewport" id="vp">
+      <div class="stage" id="stage"><img id="board" alt="board"><svg id="hot"></svg></div>
+      <div class="view-tools"><button id="zin" title="Zoom in">+</button><button id="zout" title="Zoom out">−</button>
+        <button id="fit" title="Fit the board">Fit</button></div>
+      <div class="loading" id="loading">Drawing the board…</div>
+    </div>
+    <div class="card side">
+      <h2>Power points</h2>
+      <table id="pts"></table>
+      <p class="muted" style="font-size:13px">Hover a point on the board for its last reading; click it to log power or
+        add a beam picture. The page updates by itself when the layout or the log changes.</p>
+    </div>
+  </div>
+</main>
+<div id="tip"></div>
+<script type="module">
+const [, , fi, name] = location.pathname.split("/");
+const base = `/api/layout/${fi}/${name}`;
+const pointUrl = id => `/layout/${fi}/${name}/point/${encodeURIComponent(id)}`;
+document.getElementById("sheetlink").href = `/layout/${fi}/${name}/sheet`;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const tip = document.getElementById("tip");
+
+function tipHtml(p) {
+  let h = `<b>${esc(p.label)}</b>${p.name ? " · " + esc(p.name) : ""}<br>`;
+  if (!p.power) return h + `<span class="muted">no reading yet</span>`;
+  h += `<span style="font-size:15px">${esc(p.power)}</span>`;
+  if (p.coupled_pct != null) h += ` <span class="muted">(${p.coupled_pct} % coupled)</span>`;
+  h += `<br><span class="muted">${esc(p.when)}</span>`;
+  if (p.change_pct != null) {
+    const cls = Math.abs(p.change_pct) >= 10 ? (p.change_pct < 0 ? "down" : "up") : "muted";
+    h += ` <span class="${cls}">${p.change_pct > 0 ? "+" : ""}${p.change_pct.toFixed(0)} % vs previous</span>`;
+  }
+  return h;
+}
+export function showTip(p, x, y) {
+  tip.innerHTML = tipHtml(p);
+  tip.style.display = "block";
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  tip.style.left = Math.min(x + 14, innerWidth - w - 8) + "px";
+  tip.style.top = Math.min(y + 14, innerHeight - h - 8) + "px";
+}
+export function hideTip() { tip.style.display = "none"; }
+window.__tip = {showTip, hideTip};
+
+// ---- the side list ----
+let info = null;
+async function loadInfo() {
+  info = await (await fetch(base)).json();
+  document.title = info.title;
+  document.getElementById("title").textContent = info.title;
+  document.getElementById("file").textContent = info.file;
+  const rows = info.points.map(p => {
+    const ch = p.change_pct == null ? "" :
+      `<span class="${Math.abs(p.change_pct) >= 10 ? (p.change_pct < 0 ? "down" : "up") : "muted"}">${p.change_pct > 0 ? "+" : ""}${p.change_pct.toFixed(0)} %</span>`;
+    return `<tr data-id="${esc(p.id)}"><td><b>${esc(p.label)}</b>${p.name ? "<br><span class='muted'>" + esc(p.name) + "</span>" : ""}</td>
+      <td class="num">${esc(p.power || "—")}<br>${ch}</td><td class="muted" style="font-size:12px">${esc(p.when)}</td></tr>`;
+  });
+  const t = document.getElementById("pts");
+  t.innerHTML = rows.join("") || "<tr><td class='muted'>No power points on this layout.</td></tr>";
+  t.querySelectorAll("tr[data-id]").forEach(tr => tr.onclick = () => location.href = pointUrl(tr.dataset.id));
+}
+
+// ---- 2D: the board drawing with hotspots, zoom and pan ----
+const vp = document.getElementById("vp"), stage = document.getElementById("stage");
+const img = document.getElementById("board"), hot = document.getElementById("hot");
+let d2 = null, scale = 1, tx = 0, ty = 0;
+function apply() { stage.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`; }
+function fit() {
+  if (!d2) return;
+  const r = vp.getBoundingClientRect();
+  scale = Math.min((r.width - 20) / d2.width, (r.height - 20) / d2.height);
+  tx = (r.width - d2.width * scale) / 2; ty = (r.height - d2.height * scale) / 2;
+  apply();
+}
+function zoomAt(k, cx, cy) {
+  const ns = Math.min(40, Math.max(0.2, scale * k));
+  tx = cx - (cx - tx) * ns / scale; ty = cy - (cy - ty) * ns / scale; scale = ns; apply();
+}
+async function load2d(stamp) {
+  d2 = await (await fetch(base + "/2d")).json();
+  stage.style.width = d2.width + "px"; stage.style.height = d2.height + "px";
+  hot.setAttribute("viewBox", `0 0 ${d2.width} ${d2.height}`);
+  hot.innerHTML = d2.points.map((p, i) =>
+    `<rect class="hot" data-i="${i}" x="${p.box[0]}" y="${p.box[1]}" width="${p.box[2]}" height="${p.box[3]}" rx="1.5"
+      stroke-width="0.6"/><circle class="hot" data-i="${i}" cx="${p.x}" cy="${p.y}" r="4" stroke-width="0.6"/>`).join("");
+  await new Promise(res => { img.onload = res; img.onerror = res; img.src = `${base}/2d.svg?s=${encodeURIComponent(stamp || Date.now())}`; });
+  document.getElementById("loading").style.display = "none";
+  if (!fit.done) { fit(); fit.done = true; }
+}
+hot.addEventListener("pointermove", e => {
+  const i = e.target.dataset && e.target.dataset.i;
+  if (i !== undefined) showTip(d2.points[i], e.clientX, e.clientY); else hideTip();
+});
+hot.addEventListener("pointerleave", hideTip);
+hot.addEventListener("click", e => {
+  const i = e.target.dataset && e.target.dataset.i;
+  if (i !== undefined && !moved) location.href = pointUrl(d2.points[i].id);
+});
+let drag = null, moved = false;
+const pointers = new Map();
+vp.addEventListener("pointerdown", e => {
+  pointers.set(e.pointerId, [e.clientX, e.clientY]);
+  drag = [e.clientX, e.clientY, tx, ty]; moved = false; vp.classList.add("dragging");
+});
+addEventListener("pointermove", e => {
+  if (!drag) return;
+  if (pointers.size === 2 && pointers.has(e.pointerId)) {  // pinch to zoom
+    const [a, b] = [...pointers.values()];
+    const d0 = Math.hypot(a[0] - b[0], a[1] - b[1]);
+    pointers.set(e.pointerId, [e.clientX, e.clientY]);
+    const [c, d] = [...pointers.values()];
+    const d1 = Math.hypot(c[0] - d[0], c[1] - d[1]);
+    const r = vp.getBoundingClientRect();
+    if (d0 > 0) zoomAt(d1 / d0, (c[0] + d[0]) / 2 - r.left, (c[1] + d[1]) / 2 - r.top);
+    moved = true; return;
+  }
+  const dx = e.clientX - drag[0], dy = e.clientY - drag[1];
+  if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+  tx = drag[2] + dx; ty = drag[3] + dy; apply();
+});
+addEventListener("pointerup", e => { pointers.delete(e.pointerId); drag = null; vp.classList.remove("dragging"); });
+vp.addEventListener("wheel", e => {
+  e.preventDefault();
+  const r = vp.getBoundingClientRect();
+  zoomAt(e.deltaY < 0 ? 1.15 : 1 / 1.15, e.clientX - r.left, e.clientY - r.top);
+}, {passive: false});
+document.getElementById("zin").onclick = () => zoomAt(1.25, vp.clientWidth / 2, vp.clientHeight / 2);
+document.getElementById("zout").onclick = () => zoomAt(0.8, vp.clientWidth / 2, vp.clientHeight / 2);
+document.getElementById("fit").onclick = () => fit();
+addEventListener("resize", () => fit());
+
+// ---- follow changes made elsewhere (desktop edits, readings from other PCs) ----
+let stamp = null;
+async function poll() {
+  try {
+    const s = (await (await fetch(base + "/stamp")).json()).stamp;
+    if (stamp !== null && s !== stamp) {
+      await loadInfo(); await load2d(s);
+    }
+    stamp = s;
+  } catch (e) { /* server restarting: try again */ }
+  setTimeout(poll, 5000);
+}
+await loadInfo();
+await load2d(info.stamp);
+stamp = info.stamp;
+setTimeout(poll, 5000);
+</script>
+</body>
+</html>

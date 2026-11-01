@@ -1,0 +1,109 @@
+{
+  "format": "optolayout",
+  "version": 1,
+  "table": {
+    "name": "10\" x 8\" breadboard",
+    "width": 254.0,
+    "height": 203.2,
+    "hole_pitch": 25.4,
+    "hole_offset": 12.7,
+    "cutouts": [],
+    "center_holes": false,
+    "style": "grid",
+    "hole_diameter": 6.6,
+    "edge_margin": 0.0,
+    "grid_holes": true
+  },
+  "components": [
+    {
+      "id": "iris",
+      "type": "iris",
+      "x": 38.099999999999994,
+      "y": 139.7,
+      "angle": 0,
+      "label": "Iris",
+      "part_number": "",
+      "notes": "",
+      "sch_id": "",
+      "auto_angle": true,
+      "pinned": false
+    },
+    {
+      "id": "m1",
+      "type": "mirror_1in",
+      "x": 139.7,
+      "y": 139.7,
+      "angle": 135.0,
+      "label": "M1",
+      "part_number": "",
+      "notes": "",
+      "sch_id": "",
+      "auto_angle": true,
+      "pinned": false
+    },
+    {
+      "id": "m2",
+      "type": "mirror_1in",
+      "x": 139.7,
+      "y": 63.5,
+      "angle": 315.0,
+      "label": "M2",
+      "part_number": "",
+      "notes": "",
+      "sch_id": "",
+      "auto_angle": true,
+      "pinned": false
+    },
+    {
+      "id": "fc",
+      "type": "fiber",
+      "x": 215.89999999999998,
+      "y": 63.5,
+      "angle": 180,
+      "label": "Fiber",
+      "part_number": "",
+      "notes": "",
+      "sch_id": "",
+      "auto_angle": true,
+      "pinned": false
+    }
+  ],
+  "beams": [
+    {
+      "id": "b_iris_m1",
+      "source": "iris",
+      "target": "m1",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_m1_m2",
+      "source": "m1",
+      "target": "m2",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    },
+    {
+      "id": "b_m2_fc",
+      "source": "m2",
+      "target": "fc",
+      "color": "#b77fd0",
+      "wavelength_nm": 399.0,
+      "label": ""
+    }
+  ],
+  "measurement_points": [],
+  "schematic": {
+    "elements": [],
+    "links": []
+  },
+  "lab_sheet": {
+    "points": [],
+    "names": {},
+    "include_log": true,
+    "history": 1,
+    "include_picture": true
+  }
+}

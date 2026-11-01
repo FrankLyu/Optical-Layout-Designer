@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main style="max-width:380px;margin-top:12vh">
+  <form class="card" method="post" action="/login">
+    <h2>Optical layouts</h2>
+    <p class="muted">Enter the lab password.</p>
+    <input type="hidden" name="next" id="next" value="/">
+    <div class="form-row"><input class="grow" type="password" name="password" autofocus></div>
+    <div class="form-row"><button class="primary" type="submit">Log in</button>
+      <span id="bad" class="down" style="display:none">Wrong password</span></div>
+  </form>
+</main>
+<script>
+const q = new URLSearchParams(location.search);
+document.getElementById("next").value = q.get("next") || "/";
+if (q.get("bad")) document.getElementById("bad").style.display = "inline";
+</script>
+</body>
+</html>

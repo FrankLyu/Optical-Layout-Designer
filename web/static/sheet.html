@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab sheet — {{TITLE}}</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <a href="/" class="crumb">Layouts</a><span class="crumb">›</span>
+  <a id="back" class="crumb">{{TITLE}}</a><span class="crumb">›</span>
+  <h1>Lab sheet</h1>
+</header>
+<main>
+  <form class="card no-print sheet-opts" id="opts" style="margin-bottom:12px">
+    <div class="form-row"><b style="margin-right:8px">Points</b> {{BOXES}}
+      <button type="button" id="all">All</button><button type="button" id="none">None</button></div>
+    <div class="form-row">
+      <label><input type="checkbox" id="log"{{LOG}}> Include power log</label>
+      <label>History: last <input type="number" id="history" min="1" max="100" value="{{HISTORY}}" style="width:4em"> reading(s)</label>
+      <label><input type="checkbox" id="pic"{{PIC}}> Include layout picture</label>
+      <button type="submit">Update</button>
+    </div>
+    <div class="form-row">
+      <button type="button" class="primary" id="copy">Copy for OneNote/Excel</button>
+      <button type="button" id="print">Print…</button>
+      <span class="muted" id="msg" style="font-size:13px">The points ticked by default are the ones saved in the
+        layout's lab sheet (set in the desktop app).</span>
+    </div>
+  </form>
+  <div id="sheet">{{SHEET}}</div>
+</main>
+<script>
+const [, , fi, name] = location.pathname.split("/");
+document.getElementById("back").href = `/layout/${fi}/${name}`;
+const boxes = () => [...document.querySelectorAll("input[name=pt]")];
+document.getElementById("all").onclick = () => boxes().forEach(b => b.checked = true);
+document.getElementById("none").onclick = () => boxes().forEach(b => b.checked = false);
+document.getElementById("opts").addEventListener("submit", e => {
+  e.preventDefault();
+  const q = new URLSearchParams({points: boxes().filter(b => b.checked).map(b => b.value).join(","),
+    log: document.getElementById("log").checked ? 1 : 0, history: document.getElementById("history").value,
+    pic: document.getElementById("pic").checked ? 1 : 0});
+  location.search = q.toString();
+});
+document.getElementById("print").onclick = () => print();
+document.getElementById("copy").onclick = () => {
+  // a selection copy keeps the formatting and the picture, and works without https
+  const sel = getSelection(), range = document.createRange();
+  range.selectNodeContents(document.getElementById("sheet"));
+  sel.removeAllRanges(); sel.addRange(range);
+  const ok = document.execCommand("copy");
+  sel.removeAllRanges();
+  document.getElementById("msg").textContent = ok ? "Copied: paste into OneNote or Excel (Ctrl+V)."
+    : "Could not copy: select the sheet and press Ctrl+C.";
+};
+</script>
+</body>
+</html>

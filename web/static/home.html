@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Optical layouts</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <h1>Optical layouts</h1>
+  <span class="muted">view boards and log power from any PC in the lab</span>
+  <span class="spacer"></span>
+  <a href="/logout" class="muted">Log out</a>
+</header>
+<main>
+  <div id="list" class="muted">Loading…</div>
+</main>
+<script>
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+fetch("/api/layouts").then(r => r.json()).then(d => {
+  const box = document.getElementById("list");
+  let html = "";
+  for (const folder of d.folders) {  // every configured folder, in order, empty ones too
+    const items = d.layouts.filter(l => l.folder === folder);
+    html += `<h2 style="margin:18px 0 8px">${esc(folder)}</h2><div class="grid">`;
+    if (!items.length) html += `<div class="card muted">No layouts yet</div>`;
+    for (const l of items) {
+      const when = new Date(l.modified * 1000).toLocaleString([], {dateStyle: "medium", timeStyle: "short"});
+      html += `<a class="card layout-card" href="/layout/${l.fi}/${encodeURIComponent(l.name)}">
+        <h3>${esc(l.stem)}</h3>
+        <div class="muted" style="margin-bottom:6px">${esc(l.title || "")}</div>
+        <span class="pill">${l.points} power point${l.points === 1 ? "" : "s"}</span>
+        <span class="pill">${l.has_log ? "power log" : "no log yet"}</span>
+        <div class="muted" style="font-size:12px;margin-top:6px">saved ${esc(when)}</div></a>`;
+    }
+    html += "</div>";
+  }
+  box.innerHTML = html;
+  box.classList.remove("muted");
+});
+</script>
+</body>
+</html>

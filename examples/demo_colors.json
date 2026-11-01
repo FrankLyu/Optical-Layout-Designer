@@ -1,0 +1,313 @@
+{
+  "format": "optolayout",
+  "version": 1,
+  "table": {
+    "name": "Wavelength test, 36 x 24 in",
+    "width": 914.4,
+    "height": 609.6,
+    "hole_pitch": 25.4,
+    "hole_offset": 12.7,
+    "cutouts": [],
+    "center_holes": false,
+    "style": "grid",
+    "hole_diameter": 6.6,
+    "edge_margin": 0.0,
+    "grid_holes": true
+  },
+  "components": [],
+  "beams": [],
+  "measurement_points": [],
+  "schematic": {
+    "elements": [
+      {
+        "id": "las0",
+        "kind": "laser",
+        "x": 0,
+        "y": 0,
+        "angle": 0.0,
+        "label": "421 nm",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "hwp0",
+        "kind": "hwp",
+        "x": 360,
+        "y": 0,
+        "angle": 0.0,
+        "label": "HWP1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "pbs0",
+        "kind": "pbs",
+        "x": 460,
+        "y": 0,
+        "angle": 0.0,
+        "label": "PBS1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "end0",
+        "kind": "fiber",
+        "x": 580,
+        "y": 0,
+        "angle": 0.0,
+        "label": "FC1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "las1",
+        "kind": "laser",
+        "x": 200,
+        "y": 125,
+        "angle": 0.0,
+        "label": "530 nm",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "lens1",
+        "kind": "lens",
+        "x": 360,
+        "y": 125,
+        "angle": 0.0,
+        "label": "L1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "end1",
+        "kind": "fiber",
+        "x": 580,
+        "y": 125,
+        "angle": 0.0,
+        "label": "FC2",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "las2",
+        "kind": "laser",
+        "x": 0,
+        "y": 250,
+        "angle": 0.0,
+        "label": "626 nm",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "hwp2",
+        "kind": "hwp",
+        "x": 360,
+        "y": 250,
+        "angle": 0.0,
+        "label": "HWP2",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "end2",
+        "kind": "photodiode",
+        "x": 580,
+        "y": 250,
+        "angle": 0.0,
+        "label": "PD1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "las3",
+        "kind": "laser",
+        "x": 200,
+        "y": 375,
+        "angle": 0.0,
+        "label": "741 nm",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "iris3",
+        "kind": "iris",
+        "x": 360,
+        "y": 375,
+        "angle": 0.0,
+        "label": "IR1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "end3",
+        "kind": "fiber",
+        "x": 580,
+        "y": 375,
+        "angle": 0.0,
+        "label": "FC3",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "las4",
+        "kind": "laser",
+        "x": 0,
+        "y": 500,
+        "angle": 0.0,
+        "label": "1064 nm",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "lens4",
+        "kind": "lens",
+        "x": 360,
+        "y": 500,
+        "angle": 0.0,
+        "label": "L2",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      },
+      {
+        "id": "end4",
+        "kind": "dump",
+        "x": 580,
+        "y": 500,
+        "angle": 0.0,
+        "label": "BD1",
+        "notes": "",
+        "part": "",
+        "part_number": "",
+        "auto_angle": true
+      }
+    ],
+    "links": [
+      {
+        "id": "k_las0_hwp0",
+        "source": "las0",
+        "target": "hwp0",
+        "color": "#b77fd0",
+        "wavelength_nm": 421.0,
+        "label": ""
+      },
+      {
+        "id": "k_hwp0_pbs0",
+        "source": "hwp0",
+        "target": "pbs0",
+        "color": "#b77fd0",
+        "wavelength_nm": 421.0,
+        "label": ""
+      },
+      {
+        "id": "k_pbs0_end0",
+        "source": "pbs0",
+        "target": "end0",
+        "color": "#b77fd0",
+        "wavelength_nm": 421.0,
+        "label": ""
+      },
+      {
+        "id": "k_las1_lens1",
+        "source": "las1",
+        "target": "lens1",
+        "color": "#2e9e3e",
+        "wavelength_nm": 530.0,
+        "label": ""
+      },
+      {
+        "id": "k_lens1_end1",
+        "source": "lens1",
+        "target": "end1",
+        "color": "#2e9e3e",
+        "wavelength_nm": 530.0,
+        "label": ""
+      },
+      {
+        "id": "k_las2_hwp2",
+        "source": "las2",
+        "target": "hwp2",
+        "color": "#e8571e",
+        "wavelength_nm": 626.0,
+        "label": ""
+      },
+      {
+        "id": "k_hwp2_end2",
+        "source": "hwp2",
+        "target": "end2",
+        "color": "#e8571e",
+        "wavelength_nm": 626.0,
+        "label": ""
+      },
+      {
+        "id": "k_las3_iris3",
+        "source": "las3",
+        "target": "iris3",
+        "color": "#b0122b",
+        "wavelength_nm": 741.0,
+        "label": ""
+      },
+      {
+        "id": "k_iris3_end3",
+        "source": "iris3",
+        "target": "end3",
+        "color": "#b0122b",
+        "wavelength_nm": 741.0,
+        "label": ""
+      },
+      {
+        "id": "k_las4_lens4",
+        "source": "las4",
+        "target": "lens4",
+        "color": "#6b2b2b",
+        "wavelength_nm": 1064.0,
+        "label": ""
+      },
+      {
+        "id": "k_lens4_end4",
+        "source": "lens4",
+        "target": "end4",
+        "color": "#6b2b2b",
+        "wavelength_nm": 1064.0,
+        "label": ""
+      }
+    ]
+  },
+  "lab_sheet": {
+    "points": [],
+    "names": {},
+    "include_log": true,
+    "history": 1,
+    "include_picture": true
+  }
+}

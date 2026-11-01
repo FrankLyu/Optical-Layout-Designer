@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "frame": "All STEP files are re-posed so the optic centre is at the origin, the optic normal / beam axis is +x, and +z is up. Units mm. Footprint for the 2D view = bbox projected on x-y.",
+  "mounts": [
+    {
+      "id": "km100",
+      "vendor": "Thorlabs",
+      "part_number": "KM100",
+      "metric_part_number": "KM100/M",
+      "name": "Kinematic mirror mount, 1 in",
+      "optic_diameter_mm": 25.4,
+      "toolbox_uses": [
+        "mirror_1in"
+      ],
+      "step_file": "step/KM100.step",
+      "cad_source": "https://github.com/UMassIonTrappers/PyOpticL/tree/db32ac735d69086206406d1a96bb09992e1cbc4a/PyOpticL/models/thorlabs-km100",
+      "bbox_mm": {
+        "min": [
+          -32.01,
+          -26.6,
+          -26.22
+        ],
+        "max": [
+          7.69,
+          26.23,
+          26.61
+        ]
+      },
+      "optic_center_above_mount_base_mm": 25.4,
+      "optic_center_height_source": "PyOpticL mount_position",
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100",
+      "notes": ""
+    },
+    {
+      "id": "km05",
+      "vendor": "Thorlabs",
+      "part_number": "KM05",
+      "metric_part_number": "KM05/M",
+      "name": "Kinematic mirror mount, 1/2 in",
+      "optic_diameter_mm": 12.7,
+      "toolbox_uses": [
+        "mirror_half_in"
+      ],
+      "step_file": "step/KM05.step",
+      "cad_source": "https://github.com/UMassIonTrappers/PyOpticL/tree/db32ac735d69086206406d1a96bb09992e1cbc4a/PyOpticL/models/thorlabs-km05",
+      "bbox_mm": {
+        "min": [
+          -13.91,
+          -15.05,
+          -15.05
+        ],
+        "max": [
+          5.66,
+          15.05,
+          15.05
+        ]
+      },
+      "optic_center_above_mount_base_mm": 14.73,
+      "optic_center_height_source": "PyOpticL mount_position",
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=KM05",
+      "notes": ""
+    },
+    {
+      "id": "ks1t",
+      "vendor": "Thorlabs",
+      "part_number": "KS1T",
+      "metric_part_number": "KS1T",
+      "name": "Precision kinematic mount, 1 in, SM1-threaded",
+      "optic_diameter_mm": 25.4,
+      "toolbox_uses": [
+        "mirror_1in",
+        "fiber_launcher"
+      ],
+      "step_file": "step/KS1T.step",
+      "cad_source": "https://github.com/UMassIonTrappers/PyOpticL/tree/db32ac735d69086206406d1a96bb09992e1cbc4a/PyOpticL/models/thorlabs-ks1t",
+      "bbox_mm": {
+        "min": [
+          -45.72,
+          -26.87,
+          -26.85
+        ],
+        "max": [
+          -1.18,
+          26.63,
+          26.66
+        ]
+      },
+      "optic_center_above_mount_base_mm": 26.85,
+      "optic_center_height_source": "model bbox bottom",
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=KS1T",
+      "notes": "Used with SM1FCA2 + SM1 lens tube + collimating lens as a 1 in fiber launcher (PyOpticL Fiberport_Mount_KS1T)."
+    },
+    {
+      "id": "lmr1",
+      "vendor": "Thorlabs",
+      "part_number": "LMR1",
+      "metric_part_number": "LMR1/M",
+      "name": "Fixed lens mount, 1 in, SM1 retaining ring",
+      "optic_diameter_mm": 25.4,
+      "toolbox_uses": [
+        "lens_1in"
+      ],
+      "step_file": null,
+      "cad_source": null,
+      "bbox_mm": null,
+      "optic_center_above_mount_base_mm": null,
+      "optic_center_height_source": null,
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=LMR1",
+      "notes": "STEP not available offline; download from the Thorlabs product page (CAD tab) and re-pose to the library frame."
+    },
+    {
+      "id": "lmr05",
+      "vendor": "Thorlabs",
+      "part_number": "LMR05",
+      "metric_part_number": "LMR05/M",
+      "name": "Fixed lens mount, 1/2 in, SM05 retaining ring",
+      "optic_diameter_mm": 12.7,
+      "toolbox_uses": [
+        "lens_half_in"
+      ],
+      "step_file": null,
+      "cad_source": null,
+      "bbox_mm": null,
+      "optic_center_above_mount_base_mm": null,
+      "optic_center_height_source": null,
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=LMR05",
+      "notes": "STEP not available offline; download from the Thorlabs product page (CAD tab)."
+    },
+    {
+      "id": "rsp1",
+      "vendor": "Thorlabs",
+      "part_number": "RSP1",
+      "metric_part_number": "RSP1/M",
+      "name": "Rotation mount, 1 in (waveplates / polarizers)",
+      "optic_diameter_mm": 25.4,
+      "toolbox_uses": [
+        "waveplate_1in",
+        "polarizer_1in"
+      ],
+      "step_file": "step/RSP1.step",
+      "cad_source": "https://github.com/UMassIonTrappers/PyOpticL/tree/db32ac735d69086206406d1a96bb09992e1cbc4a/PyOpticL/models/thorlabs-rsp1",
+      "bbox_mm": {
+        "min": [
+          -1.03,
+          -28.33,
+          -27.87
+        ],
+        "max": [
+          14.75,
+          28.33,
+          28.33
+        ]
+      },
+      "optic_center_above_mount_base_mm": 27.73,
+      "optic_center_height_source": "PyOpticL mount_position",
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=RSP1",
+      "notes": ""
+    },
+    {
+      "id": "rsp05",
+      "vendor": "Thorlabs",
+      "part_number": "RSP05",
+      "metric_part_number": "RSP05/M",
+      "name": "Rotation mount, 1/2 in (waveplates)",
+      "optic_diameter_mm": 12.7,
+      "toolbox_uses": [
+        "waveplate_half_in"
+      ],
+      "step_file": "step/RSP05.step",
+      "cad_source": "https://github.com/UMassIonTrappers/PyOpticL/tree/db32ac735d69086206406d1a96bb09992e1cbc4a/PyOpticL/models/thorlabs-rsp05",
+      "bbox_mm": {
+        "min": [
+          -5.79,
+          -11.11,
+          -14.05
+        ],
+        "max": [
+          5.79,
+          11.12,
+          11.5
+        ]
+      },
+      "optic_center_above_mount_base_mm": 13.98,
+      "optic_center_height_source": "PyOpticL mount_position",
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=RSP05",
+      "notes": ""
+    },
+    {
+      "id": "paf2_hca3",
+      "vendor": "Thorlabs",
+      "part_number": "PAF2-A4A",
+      "metric_part_number": "PAF2-A4A + HCA3",
+      "name": "FiberPort fiber launcher on HCA3 mounting adapter",
+      "optic_diameter_mm": null,
+      "toolbox_uses": [
+        "fiber_launcher",
+        "fiber_coupler"
+      ],
+      "step_file": "step/PAF2-A4A_on_HCA3.step",
+      "cad_source": "https://github.com/UMassIonTrappers/PyOpticL/tree/db32ac735d69086206406d1a96bb09992e1cbc4a/PyOpticL/models/thorlabs-paf2-a4a",
+      "bbox_mm": {
+        "min": [
+          -12.3,
+          -19.17,
+          -26.99
+        ],
+        "max": [
+          11.95,
+          19.17,
+          14.41
+        ]
+      },
+      "optic_center_above_mount_base_mm": 26.99,
+      "optic_center_height_source": "model bbox bottom",
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=PAF2-A4A",
+      "notes": "Lens variant -A4A; other PAF2 lens codes share the body."
+    },
+    {
+      "id": "km100pm",
+      "vendor": "Thorlabs",
+      "part_number": "KM100PM",
+      "metric_part_number": "KM100PM/M",
+      "name": "Kinematic prism / platform mount (PBS cubes, AOMs)",
+      "optic_diameter_mm": null,
+      "toolbox_uses": [
+        "pbs_cube",
+        "aom"
+      ],
+      "step_file": "step/KM100PM_no_platform.step",
+      "cad_source": "https://github.com/UMassIonTrappers/PyOpticL/tree/db32ac735d69086206406d1a96bb09992e1cbc4a/PyOpticL/models/thorlabs-km100pm-noplatform",
+      "bbox_mm": {
+        "min": [
+          -37.47,
+          -36.77,
+          -7.56
+        ],
+        "max": [
+          0.44,
+          16.06,
+          45.27
+        ]
+      },
+      "optic_center_above_mount_base_mm": null,
+      "optic_center_height_source": null,
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=KM100PM",
+      "notes": "Model has no platform; origin is the inner mounting hole, not the optic. Platform (e.g. PM3/KM100PM platform) and optic height depend on the clamp used."
+    },
+    {
+      "id": "ida12",
+      "vendor": "Thorlabs",
+      "part_number": "IDA12",
+      "metric_part_number": "IDA12/M",
+      "name": "Ring-actuated iris, 12 mm max aperture",
+      "optic_diameter_mm": null,
+      "toolbox_uses": [
+        "iris"
+      ],
+      "step_file": "step/IDA12.step",
+      "cad_source": "https://github.com/UMassIonTrappers/PyOpticL/tree/db32ac735d69086206406d1a96bb09992e1cbc4a/PyOpticL/models/thorlabs-ida12",
+      "bbox_mm": {
+        "min": [
+          -1.23,
+          -16.34,
+          -13.3
+        ],
+        "max": [
+          4.84,
+          21.4,
+          13.3
+        ]
+      },
+      "optic_center_above_mount_base_mm": 13.3,
+      "optic_center_height_source": "model bbox bottom",
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=IDA12",
+      "notes": "Mounts from the side tap; post goes along -y in this frame."
+    },
+    {
+      "id": "rd_mni_hs",
+      "vendor": "Radiant Dyes",
+      "part_number": "MNI-HS (1 in front plate)",
+      "metric_part_number": null,
+      "name": "High-stability mirror mount, 1 in, 4 springs, stainless insert",
+      "optic_diameter_mm": 25.4,
+      "toolbox_uses": [
+        "mirror_1in"
+      ],
+      "step_file": null,
+      "cad_source": null,
+      "bbox_mm": null,
+      "optic_center_above_mount_base_mm": null,
+      "optic_center_height_source": null,
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.radiant-dyes.com/index.php/products/optomechanics/high-stable-mirror-mounts/130-mni-h",
+      "notes": "No public STEP or dimensioned spec found; drawing image only. M4 base thread (#8-32 on request). Exact order code (back plate / front plate / screw type) to confirm. Datasheet: https://www.radiant-dyes.com/PDF/2018/MNI-HS.pdf ; drawing: https://www.radiant-dyes.com/images/stories/RDL/MirrorMounts/drawing_MNI-HS.jpg"
+    }
+  ],
+  "extras": [
+    {
+      "id": "polaris_k05s1",
+      "vendor": "Thorlabs",
+      "part_number": "POLARIS-K05S1",
+      "metric_part_number": "POLARIS-K05S1",
+      "name": "Polaris low-drift mirror mount, 1/2 in",
+      "optic_diameter_mm": 12.7,
+      "toolbox_uses": [
+        "mirror_half_in"
+      ],
+      "step_file": "step/POLARIS-K05S1.step",
+      "cad_source": "https://github.com/UMassIonTrappers/PyOpticL/tree/db32ac735d69086206406d1a96bb09992e1cbc4a/PyOpticL/models/polaris-k05s1",
+      "bbox_mm": {
+        "min": [
+          -14.44,
+          -12.87,
+          -12.87
+        ],
+        "max": [
+          5.38,
+          12.87,
+          12.84
+        ]
+      },
+      "optic_center_above_mount_base_mm": 12.7,
+      "optic_center_height_source": "PyOpticL mount_position",
+      "base_tap": "8-32 (imperial) / M4 (metric)",
+      "product_url": "https://www.thorlabs.com/thorproduct.cfm?partnumber=POLARIS-K05S1",
+      "notes": "Bonus: came with the PyOpticL models."
+    }
+  ]
+}
