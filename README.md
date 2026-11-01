@@ -102,6 +102,10 @@ Once the board is built, the same file becomes its logbook.
 2. Click a point to log a reading. Enter the power, meter and notes, and the time is recorded for you. You can see the full history and a plot, and attach beam pictures from a file or the clipboard.
 3. Each point on the board shows its latest power. The ring turns red or green if the last change was 10 % or more.
 
+The 3D tab shows the same log. Each power point is an orange bead on its beam. Hover over one and a real Thorlabs S121C sensor head appears in the beam on its post, with the latest reading beside it. Click it to open the point's log.
+
+![An S121C power sensor in the beam, showing its latest reading of 42.4 mW](docs/images/power_sensor_3d.png)
+
 **Your history is safe.** Readings stay with the point even if you move parts, and a deleted beam only archives its points. Everything lives in `<layout>.logbook.sqlite` next to the layout. Readings can't be overwritten: to correct one, add a new one with a note. Deleting an entry only hides it, and you can restore it.
 
 **For alignment days,** the lab sheet (Ctrl+P) gives you the picture plus a table of the points you choose. Copy it into Excel, Word or a lab notebook, or save it as a PDF or CSV. You can export the whole log from **File > Export power log (CSV)…**.
