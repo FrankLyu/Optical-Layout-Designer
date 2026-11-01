@@ -112,7 +112,7 @@ The 3D tab shows the same log. Each power point is an orange bead on its beam. H
 
 ## Log from a tablet or another PC
 
-The app can serve your layouts to any browser on your network, so you can view a board and log power at the table.
+Any PC, tablet or phone on the same local network (LAN) can open your layouts in a web browser and log power, with nothing to install on it. So you can edit on your desk PC and enter readings from a laptop at the table.
 
 ```
 pip install -r web/requirements.txt
@@ -120,7 +120,12 @@ pip install -r web/requirements.txt
 
 Once that's installed, the web server starts with the app, and the top right of the menu bar shows the address. By default only your own PC can reach it, and it lists the `examples` folder.
 
-To share it, copy `web/config.example.json` to `web/config.json`, list your layout folders, set a password and change `host` to `0.0.0.0`. Layouts are read-only in the browser, and readings go into the same log as the desktop app. [web/README.md](web/README.md) has the details.
+To share it with the LAN:
+
+1. Copy `web/config.example.json` to `web/config.json`, list your layout folders, set a password and change `host` to `0.0.0.0`.
+2. Restart the app, and open the address from the menu bar in a browser on the other device. It looks like `http://192.168.1.20:8000`. You may need to allow the port through the host PC's firewall.
+
+Layouts are read-only in the browser, and readings and beam pictures go into the same log as the desktop app. The pages are available while the app is open on the host PC. [web/README.md](web/README.md) has the details, including the firewall rule.
 
 ## Keyboard shortcuts
 
