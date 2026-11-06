@@ -1585,7 +1585,27 @@ def install_error_handler(win_getter) -> None:
     sys.excepthook = hook
 
 
+def set_gl_format() -> None:
+    """The OpenGL format the 3D tab (VTK) needs, made the default before any
+    window exists. pyvistaqt sets it only when the 3D tab is first opened, which
+    is too late on macOS: there the main window already has an old OpenGL 2.1
+    context and the 3D view stays black."""
+    from PySide6.QtGui import QSurfaceFormat
+    fmt = QSurfaceFormat()  # desktop OpenGL 3.2 core, as pyvistaqt asks for
+    fmt.setRenderableType(QSurfaceFormat.RenderableType.OpenGL)
+    fmt.setProfile(QSurfaceFormat.OpenGLContextProfile.CoreProfile)
+    fmt.setVersion(3, 2)
+    fmt.setSwapBehavior(QSurfaceFormat.SwapBehavior.DoubleBuffer)
+    for setter in (fmt.setRedBufferSize, fmt.setGreenBufferSize, fmt.setBlueBufferSize, fmt.setAlphaBufferSize,
+                   fmt.setDepthBufferSize):
+        setter(8)
+    fmt.setStencilBufferSize(0)
+    fmt.setSamples(0)  # VTK does its own anti-aliasing
+    QSurfaceFormat.setDefaultFormat(fmt)
+
+
 def main():
+    set_gl_format()  # before the QApplication, as Qt asks
     app = QApplication(sys.argv)
     app.setApplicationName("Optical Layout Designer")
     install_error_handler(lambda: QApplication.activeWindow())

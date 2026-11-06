@@ -10,7 +10,7 @@ It works like KiCad's schematic and board editors. You describe the optical syst
 
 ## Get started
 
-It's developed and tested on Windows with Python 3.13.
+It's developed and tested on Windows with Python 3.13. It also runs on macOS. [CHANGELOG.md](CHANGELOG.md) lists what changed in each update.
 
 ```
 pip install -r requirements.txt
