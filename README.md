@@ -89,6 +89,8 @@ The **3D** tab (Ctrl+3) builds the board with real mount shapes, posts or pedest
 
 It needs no extra setup, because the meshes come with this repository. The tab is optional, and the app also runs without `pyvista` installed.
 
+A part with no 3D model is drawn as a simple shape, and the status line in the 3D tab names the missing models. To add your own mount, see [Add a new part](#add-a-new-part) below.
+
 ### 5. Order the parts and share the design
 - **Bill of materials** (Ctrl+Shift+B): lists the parts, posts and adapters the board needs. Export it from the File menu as a CSV.
 - **Pictures** (Ctrl+E for SVG, Ctrl+Shift+E for PNG): export the current tab.
@@ -127,24 +129,15 @@ To share it with the LAN:
 
 Layouts are read-only in the browser, and readings and beam pictures go into the same log as the desktop app. The pages are available while the app is open on the host PC. [web/README.md](web/README.md) has the details, including the firewall rule.
 
-## Keyboard shortcuts
+## Add a new part
 
-| Keys | What it does |
-|---|---|
-| Ctrl+1 / Ctrl+2 / Ctrl+3 | Schematic / Layout / 3D |
-| Ctrl+Tab | Switch between schematic and layout |
-| S, B, M, L | Select, draw beam, power point, ruler (Esc cancels) |
-| R / Shift+R | Rotate ±45° |
-| ] / [ | Rotate ±5° |
-| A | Aim automatically again |
-| Arrow keys | Nudge one hole on the layout (Shift: 1 mm) |
-| Ctrl+D, Del | Duplicate, delete (undo restores a part where it was) |
-| Ctrl+Z / Ctrl+Y | Undo / redo on both tabs |
-| F, Z | Fit the view, zoom to the selection |
-| Ctrl+= / Ctrl+- | Bigger / smaller text |
-| Ctrl+T, Ctrl+Shift+B, Ctrl+P | Parts table, bill of materials, lab sheet |
+A part needs a 2D drawing for the schematic and layout, and optionally a 3D model made from the vendor's STEP file. [Add a new part from a STEP file](component_library/README.md#add-a-new-part-from-a-step-file) walks through it:
 
-On the layout, the mouse wheel zooms and middle-drag pans.
+1. Save the STEP file in `component_library/step/`, line it up and run `tools/simplify_cad.py` to make the 3D mesh.
+2. Draw the 2D symbol in `optolayout/symbols.py` and `register()` it, so it appears in the toolbox.
+3. Link the new type to its model and footprint in `optolayout/mounts3d.py`, and to its pillar or pedestal if you use an Olego or LightFlow board.
+
+[component_library/README.md](component_library/README.md) also lists where to get the STEP file for each mount that comes with the app.
 
 ## Going further
 
@@ -152,9 +145,7 @@ On the layout, the mouse wheel zooms and middle-drag pans.
 
 **Build a layout from a script.** The files named `examples/make_*.py` show how. The layout format is plain JSON (see `optolayout/model.py`): each part has a permanent `id`, a `type`, `x` and `y` in mm from the top-left corner with y pointing down, an `angle` in degrees, a `label` and a `part_number`.
 
-**Add a part type.** Write a draw function in `optolayout/symbols.py` and `register()` it. To give it a 3D shape, add it to `MODELS` in `optolayout/mounts3d.py`.
-
-**Add a real 3D model, or make a high-quality render.** The full STEP files aren't included. You only need them to add a mount or for `tools/render3d.py`, which leaves out any mount with no STEP file. [component_library/README.md](component_library/README.md) lists where to get each one, what to name it and how to line it up, and [docs/3D_RENDER.md](docs/3D_RENDER.md) covers rendering:
+**Make a high-quality render.** `tools/render3d.py` needs the full STEP files, which aren't included, and leaves out any mount without one. See [docs/3D_RENDER.md](docs/3D_RENDER.md):
 
 ```
 pip install cadquery-ocp mitsuba

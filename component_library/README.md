@@ -2,15 +2,44 @@
 
 `mounts.json` lists the mounts used in 3D, with each one's product page, size and optic height. The 3D view reads the light meshes in `mesh/`, which come with this repository, so it shows the real mounts without any download. The full STEP files aren't included. A part with no mesh is drawn as a simple shape, and the status line in the 3D tab says which models are missing.
 
-## Add or rebuild a model
-1. Download the STEP file from the part's page below (on Thorlabs pages, look under the CAD tab).
-2. Save it in `component_library/step/` with exactly the file name in the table. The name is how the app finds it.
-3. Line it up (see below).
-4. Run the converter, which needs `pip install cadquery-ocp pyvista`:
+## Add a new part from a STEP file
+A part has two halves that you add separately: a 2D drawing for the schematic and layout, and a 3D model made from the vendor's STEP file. The 2D drawing is drawn by hand. It isn't made from the STEP file.
+
+1. **Get the STEP file.** Download it from the vendor's page (on Thorlabs pages, look under the CAD tab) and save it in `component_library/step/`, for example `component_library/step/KM200.step`. The file name without its extension is the name the rest of these steps use.
+2. **Line it up.** Put the model in the library frame (see [Line a model up](#line-a-model-up)). Vendor files usually need a `POSES` entry in `tools/simplify_cad.py`.
+3. **Make the mesh.** This needs `pip install cadquery-ocp pyvista`:
    ```
-   python tools/simplify_cad.py KM100
+   python tools/simplify_cad.py KM200
    ```
-   This writes a small mesh to `component_library/mesh/`, and that mesh is what the 3D view reads. Restart the app to see it.
+   It writes `component_library/mesh/KM200.ply`, which is what the 3D view reads. It also prints `base … mm below the optic`, the optic height you need in step 5. If that height or the model's shape looks wrong in the 3D view, fix the pose and run it again.
+4. **Draw the 2D symbol.** In `optolayout/symbols.py`, write a draw function and `register()` it with a new type key, a name, a default part number and a toolbox group:
+   ```python
+   register("mirror_km200", 'Mirror 2" (Thorlabs)', _tl_mirror_2in, "KM200", "Mirrors")
+   ```
+   Draw it in the part's own frame, in mm: the optical point (mirror face, lens centre) at the origin, the beam along +x and the mount behind it at -x. Copying a similar existing symbol is the quickest start. The part then shows up in the toolbox.
+5. **Link the type to the model.** In `optolayout/mounts3d.py`, add the type to `MODELS` with the STEP file name and the optic height from step 3:
+   ```python
+   "mirror_km200": Model3D("KM200.step", 38.10, mirror_disc=50.8),
+   ```
+   `mirror_disc` or `glass_disc` adds the optic itself, and `extras` lists adapters for the bill of materials.
+6. **Give it its real footprint.** Add the mesh's top-down extent to `MESH_FOOTPRINT` in the same file. The overlap check and the adapter or pedestal sizing use it. Without it, the overlap check uses the 2D drawing, which is drawn a little generous, and adapters and pedestals come out as a generic 20 mm square. Print the extent with:
+   ```
+   python -c "import pyvista as pv; print(pv.read('component_library/mesh/KM200.ply').bounds[:4])"
+   ```
+   The four numbers are xmin, xmax, ymin and ymax, in that order:
+   ```python
+   "KM200": (-40.0, 9.0, -38.0, 38.0),
+   ```
+7. **Tell your board type how to hold it.** This only matters on boards whose parts don't stand on posts:
+   - **Olego:** add the type to `OLEGO_PILLARS` in `optolayout/mounts3d.py` with the pillar it stands on. If the mount's base isn't under the optic, add the offset to `MOUNT_BASE_OFFSET`. See [docs/OLEGO_MATING.md](../docs/OLEGO_MATING.md).
+   - **LightFlow:** add a `LightFlowElement` to `LIGHTFLOW_ELEMENTS` with the pedestal's footprint and screw holes. Without one, the part gets a plain pedestal the size of its footprint. See [docs/LIGHTFLOW_BOARD.md](../docs/LIGHTFLOW_BOARD.md).
+   - **PyOpticL and posts on a grid or pre-drilled board:** nothing more is needed. The adapter or post is sized from the footprint and optic height.
+8. **Check it.** Restart the app, place the part, and look at it in the Layout and 3D tabs. The mount should sit at beam height, face along the beam and match its 2D drawing.
+
+Optionally, add an entry to `mounts.json` and to the table below, so that others know where the file came from. The app doesn't read `mounts.json`. It's a record of each model's source, size and optic height.
+
+## Rebuild an existing model
+The STEP files listed below aren't included. To rebuild a mesh, for example after a vendor update, save the file in `component_library/step/` with exactly the name in the table, and run `python tools/simplify_cad.py <name>`.
 
 | 2D part types | Part | File name | Get it from | Optic above base |
 |---|---|---|---|---|
